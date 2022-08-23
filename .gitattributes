@@ -41,21 +41,43 @@ class Student:
 
     def __lt__(self, other):
         if isinstance(other, Student):
-            if self.avg_grade() == other.avg_grade():
-                msg = (
-                    f'Средние оценки у студентов {self.name} {self.surname} и {other.name} {other.surname} одинаковы\n')
-                return msg
-            elif self.avg_grade() > other.avg_grade():
-                msg = (
-                    f'Средняя оценка у студента {self.name} {self.surname} выше, чем у студента {other.name} {other.surname}\n')
-                return msg
+            res = self.avg_grade() < other.avg_grade()
+            if res == True:
+                print(f'Средние оценки у студента {self.name} {self.surname} ниже чем у {other.name} {other.surname}')
             else:
-                msg = (
-                    f'Средняя оценка у студента {other.name} {other.surname} выше, чем у студента {self.name} {self.surname}\n')
-                return msg
+                print(f'Средние оценки у студента{self.name} {self.surname} не ниже чем у {other.name} {other.surname}')
         else:
-            msg = f'{other.name} {other.surname} не является студентом!'
-            return msg
+            print(f'{other.name} {other.surname} не является студентом!')
+
+    def __gt__(self, other):
+        if isinstance(other, Student):
+            res = self.avg_grade() > other.avg_grade()
+            if res == True:
+                print(f'Средние оценки у студента{self.name} {self.surname} выше чем у {other.name} {other.surname}')
+            else:
+                print(f'Средние оценки у студента {self.name} {self.surname} не выше чем у {other.name} {other.surname}')
+        else:
+            print(f'{other.name} {other.surname} не является студентом!')
+
+    def __eq__(self, other):
+        if isinstance(other, Student):
+            res = self.avg_grade() > other.avg_grade()
+            if res == True:
+                print(f'Средние оценки у студентов {self.name} {self.surname} и {other.name} {other.surname} равны')
+            else:
+                print(f'Средние оценки у стдентов {self.name} {self.surname} и {other.name} {other.surname} НЕ РАВНЫ')
+        else:
+            print(f'{other.name} {other.surname} не является студентом!')
+
+    def __ne__(self, other):
+        if isinstance(other, Student):
+            res = self.avg_grade() > other.avg_grade()
+            if res == True:
+                print(f'Средние оценки у студентов {self.name} {self.surname} и {other.name} {other.surname} не равны')
+            else:
+                print(f'Средние оценки у студентов{self.name} {self.surname} и {other.name} {other.surname} РАВНЫ')
+        else:
+            print(f'{other.name} {other.surname} не является студентом!')
 
 
 class Mentor:
@@ -96,22 +118,44 @@ class Lecturer(Mentor):
 
     def __lt__(self, other):
         if isinstance(other, Lecturer):
-            if self.avg_rate() == other.avg_rate():
-                msg = (
-                    f'Средние оценки у лекторов {self.name} {self.surname} и {other.name} {other.surname} одинаковы\n')
-                return msg
-            elif self.avg_rate() > other.avg_rate():
-                msg = (
-                    f'Средняя оценка у лектора {self.name} {self.surname} выше, чем у лектора {other.name} {other.surname}\n')
-                return msg
+            res = self.avg_rate() < other.avg_rate()
+            if res == True:
+                print(f'Средние оценки {self.name} {self.surname} ниже чем у {other.name} {other.surname}')
             else:
-                msg = (
-                    f'Средняя оценка у лектора {other.name} {other.surname} выше, чем у лектора {self.name} {self.surname}\n')
-                return msg
+                print(f'Средние оценки {self.name} {self.surname} не ниже чем у {other.name} {other.surname}')
         else:
-            msg = f'{other.name} {other.surname} не является лектором!'
-            return msg
+            print(f'{other.name} {other.surname} не является лектором!')
 
+    def __gt__(self, other):
+        if isinstance(other, Lecturer):
+            res = self.avg_rate() > other.avg_rate()
+            if res == True:
+                print(f'Средняя оценка у лектора {self.name} {self.surname} выше чем у {other.name} {other.surname}')
+            else:
+                print(f'Средняя оценка у лектора {self.name} {self.surname} не выше чем у {other.name} {other.surname}')
+        else:
+            print(f'{other.name} {other.surname} не является лектором!')
+
+
+    def __eq__(self,other):
+        if isinstance(other, Lecturer):
+            res = self.avg_rate() == other.avg_rate()
+            if res == True:
+                print(f'Средняя оценка у лекторов {self.name} {self.surname} и {other.name} {other.surname} равны')
+            else:
+                print(f'Средняя оценка у лекторов {self.name} {self.surname} и {other.name} {other.surname} НЕ равны')
+        else:
+            print(f'{other.name} {other.surname} не является лектором!')
+
+    def __ne__(self, other):
+        if isinstance(other, Lecturer):
+            res = self.avg_rate() != other.avg_rate()
+            if res == True:
+                print(f'Средняя оценка у лекторов {self.name} {self.surname} и {other.name} {other.surname} не равны')
+            else:
+                print(f'Средняя оценка у лекторов {self.name} {self.surname} и {other.name} {other.surname} РАВНЫ')
+        else:
+            print(f'{other.name} {other.surname} не является лектором!')
 
 class Reviewer(Mentor):
     def __init__(self, name, surname):
@@ -194,29 +238,36 @@ cool_reviewer.rate_hw(student2, 'PyDev', 9)
 
 lecturer = Lecturer('Chad', 'Giga')
 cool_lecturer = Lecturer('Onotole', 'Vasserman')
-tought_lacturer = Lecturer('Harold', 'Hide-The-Pain')
+tought_lecturer = Lecturer('Harold', 'Hide-The-Pain')
 lecturer.courses_attached += ['PyDev']
 cool_lecturer.courses_attached += ['Git']
-tought_lacturer.courses_attached += ['Python']
+tought_lecturer.courses_attached += ['Python']
 
 best_student.rate_lec(lecturer, 'PyDev', 10)
 best_student.rate_lec(cool_lecturer, 'Git', 10)
-best_student.rate_lec(tought_lacturer, 'Python', 10)
+best_student.rate_lec(tought_lecturer, 'Python', 10)
 student1.rate_lec(lecturer, 'PyDev', 9)
 student1.rate_lec(cool_lecturer, 'Git', 10)
-student1.rate_lec(tought_lacturer, 'Python', 8)
+student1.rate_lec(tought_lecturer, 'Python', 8)
 student2.rate_lec(lecturer, 'PyDev', 8)
 student2.rate_lec(cool_lecturer, 'Git', 7)
-student2.rate_lec(tought_lacturer, 'Python', 10)
+student2.rate_lec(tought_lecturer, 'Python', 10)
 
 print(best_student)
 print(student1)
 print(student2)
 print(lecturer)
 print(cool_lecturer)
-print(tought_lacturer)
+print(tought_lecturer)
 print(cool_reviewer)
 print(get_avg_students([best_student, student1, student2], 'PyDev'))
-print(get_avg_lecturers([cool_lecturer, tought_lacturer, lecturer], 'Git'))
+print(get_avg_lecturers([cool_lecturer, tought_lecturer, lecturer], 'Git'))
 print(student1.__lt__(best_student))
-print(lecturer.__lt__(cool_lecturer))
+print(student1.__gt__(best_student))
+print(student1.__eq__(best_student))
+print(student1.__ne__(best_student))
+print(lecturer.__eq__(tought_lecturer))
+print(lecturer.__ne__(cool_lecturer))
+print(cool_lecturer.__lt__(tought_lecturer))
+print(lecturer.__gt__(tought_lecturer))
+print(lecturer.__lt__(best_student))
